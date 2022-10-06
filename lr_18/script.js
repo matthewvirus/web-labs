@@ -5,6 +5,7 @@ let passField = document.getElementById('fld-pass');
 let resetButton = document.getElementById('btn-reset');
 let textArea = document.getElementById('txt-area');
 let submitButton = document.getElementById('btn-submit');
+let buttonButton = document.getElementById('btn-btn');
 
 let checkboxes = document.querySelectorAll('input[name="check"]');
 let radios = document.querySelectorAll('input[name="gender"]');
@@ -13,9 +14,15 @@ let select = form.elements.country;
 
 let flag = false;
 
+let ev = "dblclick";
+
 passButton.addEventListener("click", onPassButtonClick);
 resetButton.addEventListener("click", onResetButtonClick);
 submitButton.addEventListener("dblclick", onSubmitButtonClick);
+buttonButton.addEventListener("click", () => {
+    submitButton.removeEventListener("dblclick", onSubmitButtonClick);
+    submitButton.addEventListener("click", onSubmitButtonClick);
+});
 
 function onPassButtonClick() {
     if (passField.value === "" || passField.value != "Text field") {
