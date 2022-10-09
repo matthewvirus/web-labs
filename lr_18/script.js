@@ -14,8 +14,6 @@ let select = form.elements.country;
 
 let flag = false;
 
-let ev = "dblclick";
-
 passButton.addEventListener("click", onPassButtonClick);
 resetButton.addEventListener("click", onResetButtonClick);
 submitButton.addEventListener("dblclick", onSubmitButtonClick);
