@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LR 20</title>
+    </head>
+    <body>
+        <div class="main-lr">
+            <div class="n1-2">
+                <button class="json-obj">Json to Object</button>
+                <ul class="monthes">
+                </ul>
+            </div>
+            <div class="n3">
+                <button class="append-list">Add list on page</button>
+            </div>
+            <div class="n4">
+                <button class="body-children">Get body children</button>
+            </div>
+            <div class="n5">
+                <button class="create-table">Create a table</button>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script>
+        $(document).ready(function() {
+            
+            // tasks 1,2
+
+            let jsonString = '';
+            let listItems = [
+                'January', 
+                'February', 
+                'March', 
+                'April', 
+                'May', 
+                'June', 
+                'July', 
+                'August', 
+                'September', 
+                'October', 
+                'November', 
+                'December'
+            ];
+
+            $('.json-obj').click(addElementsToString);
+            
+            function addElementsToString() {
+                jsonString += '{';
+                for(let i = 0; i < listItems.length; i++) {
+                    jsonString += '"v' + i + '": "' + listItems[i] + '",';
+                }
+                jsonString = jsonString.slice(0, -1);
+                jsonString += '}';
+                console.log(jsonString);
+                JSON.parse(jsonString, function(_k,v) {
+                    return (typeof(v) !== 'object')? $('.monthes').append($('<li>').html(v)) : undefined;
+                });
+            }
+
+            // task 3
+
+            let user = {
+                name: "Matthew",
+                dob: new Date("July 25, 2004").toLocaleDateString(
+                    'en-us', 
+                    { weekday:"long", year:"numeric", month:"short", day:"numeric"}
+                ),
+                passwordHash: "bf19a0254f74dc96e2998a1de1150a8899936cbcc31448ab018bcba99ca4ef87"
+            };
+
+            $('.append-list').click(appendListOnPage);
+
+            function appendListOnPage() {
+                $('.n3').append($('<ul>')
+                .append([
+                    addElToList(user.name),
+                    addElToList(user.dob),
+                    addElToList(user.passwordHash)]));
+            }
+            function addElToList(field) {
+                return $('<li>').html(field);
+            }
+
+            // task 4
+
+            let childrenList = [];
+            
+            $('.body-children').click(function() {
+                $('body').children().each(function() {
+                    console.log($(this));
+                });
+            });
+
+            // task 5, 6
+
+            $('.create-table').click(createTable);
+            function createTable() {
+                $('.n5').append($('<table>')
+                    .append($('<tr>')
+                        .append($('<th>'))
+                        .append($('<th>').text("PRESENT"))
+                        .append($('<th>').text("PAST"))
+                        .append($('<th>').text("FUTURE")))
+                    .append($('<tr>')
+                        .append($('<th>').text("+"))
+                        .append($('<td>').text("I dance"))
+                        .append($('<td>').text("I danced"))
+                        .append($('<td>').text("I will dance")))
+                    .append($('<tr>')
+                        .append($('<th>').text("-"))
+                        .append($('<td>').text("I don't dance"))
+                        .append($('<td>').text("I din't dance"))
+                        .append($('<td>').text("I'll not dance")))
+                    .append($('<tr>')
+                        .append($('<th>').text("?"))
+                        .append($('<td>').text("Do I dance?"))
+                        .append($('<td>').text("Did I dance?"))
+                        .append($('<td>').text("Will I dance?")))
+                );
+                $('th').addClass('headers');
+                $('td').addClass('descs');
+                $('.headers').css({
+                    "color": "white",
+                    "background-color": "#4db6ac",
+                    "font-family": "system-ui",
+                    "font-size": "12px",
+                    "padding": "10",
+                    "font-weight": "bold"
+                });
+                $('.descs').css({
+                    "color": "white",
+                    "background-color": "#26c6da",
+                    "font-family": "system-ui",
+                    "font-size": "10px",
+                    "padding": "10",
+                    "font-weight": "normal",
+                    "text-align": "center"
+                });
+            }
+
+            // task 7
+
+            /// smth
+        });
+    </script>
+    </body>
+</html>
