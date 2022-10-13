@@ -19,11 +19,40 @@
             <div class="n5">
                 <button class="create-table">Create a table</button>
             </div>
+            <div class="n8">
+                <form onsubmit="return false">
+                    <div>
+                        <label for="name">Name*</label>
+                        <input class="name" type="text" name="name">
+                    </div>
+                    <div>
+                        <label for="surname">Surname*</label>
+                        <input class="surname" type="text" name="surname">
+                    </div>
+                    <div>
+                        <label for="Age">Age*</label>
+                        <input class="age" type="number" name="age">
+                    </div>
+                    <div>
+                        <label for="passwrord">Passwrord*</label>
+                        <input class="password" type="text" name="password">
+                    </div>
+                    <div>
+                        <input class="submit" type="submit" value="Submit">
+                    </div>
+                </form>
+            </div>
+            <div class="n9">
+                <label class="switch">
+                    <input type="checkbox" class="slider">
+                    <span class="slider-round"></span>
+                    <span class="slider-text">Off</span>
+                </label>
+            </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-    <script>
+        <script>
         $(document).ready(function() {
-            
             // tasks 1,2
 
             let jsonString = '';
@@ -98,9 +127,9 @@
                 $('.n5').append($('<table>')
                     .append($('<tr>')
                         .append($('<th>'))
-                        .append($('<th>').text("PRESENT"))
-                        .append($('<th>').text("PAST"))
-                        .append($('<th>').text("FUTURE")))
+                        .append($('<th>').text("PRESENT").addClass('time'))
+                        .append($('<th>').text("PAST").addClass('time'))
+                        .append($('<th>').text("FUTURE").addClass('time')))
                     .append($('<tr>')
                         .append($('<th>').text("+"))
                         .append($('<td>').text("I dance"))
@@ -140,8 +169,58 @@
 
             // task 7
 
-            /// smth
+            $('body').on('mouseover', '.time', function() {
+                alert($(this).text());
+            });
+
+            // task 8
+            
+            $('body').on('click', '.submit', function() {
+                $('.error').css("color", "red");
+            });
+
+            $('.submit').click(validateForm);
+
+            function validateForm() {
+                let validationArray = [];
+                let i = 0;
+
+                let name = $('.name').val();
+                let surname = $('.surname').val();
+                let age = $('.age').val();
+                let password = $('.password').val();
+
+                validationArray.push(validateElements(name, 'Name', '.name'));
+                validationArray.push(validateElements(surname, 'Surname', '.surname'));
+                validationArray.push(validateElements(age, 'Age', '.age'));
+                validationArray.push(validateElements(password, 'Password', '.password'));
+
+                validationArray.forEach(function(el) {
+                    if (el) i++; 
+                });
+                if (i === validationArray.length) {
+                    alert('Success!')
+                };
+            }
+
+            function validateElements(value, elName, elClass) {
+                if (value.length === 0) {
+                    $(elClass).after('<br><span class="error">' + elName + ' is required</span>');
+                    return false;
+                }
+                $(elClass).children($('span').hide());
+                return true;
+            }
+
+            // task 9
+            $('.switch').click(
+                function() {
+                    $('.slider').animate( {
+                        "background-color": "blue"
+                    });
+                }
+            );
         });
-    </script>
+        </script>
     </body>
 </html>
