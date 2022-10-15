@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    // tasks 1,2
-
     let jsonString = '';
     let listItems = [
         'January', 
@@ -16,9 +14,7 @@ $(document).ready(function() {
         'November', 
         'December'
     ];
-
     $('.json-obj').click(addElementsToString);
-    
     function addElementsToString() {
         jsonString += '{';
         for(let i = 0; i < listItems.length; i++) {
@@ -32,8 +28,6 @@ $(document).ready(function() {
         });
     }
 
-    // task 3
-
     let user = {
         name: "Matthew",
         dob: new Date("July 25, 2004").toLocaleDateString(
@@ -42,9 +36,7 @@ $(document).ready(function() {
         ),
         passwordHash: "bf19a0254f74dc96e2998a1de1150a8899936cbcc31448ab018bcba99ca4ef87"
     };
-
     $('.append-list').click(appendListOnPage);
-
     function appendListOnPage() {
         $('.n3').append($('<ul>')
         .append([
@@ -55,18 +47,12 @@ $(document).ready(function() {
     function addElToList(field) {
         return $('<li>').html(field);
     }
-
-    // task 4
-
-    let childrenList = [];
     
     $('.body-children').click(function() {
         $('body').children().each(function() {
             console.log($(this));
         });
     });
-
-    // task 5, 6
 
     $('.create-table').click(createTable);
     function createTable() {
@@ -113,20 +99,14 @@ $(document).ready(function() {
         });
     }
 
-    // task 7
-
     $('body').on('mouseover', '.time', function() {
         alert($(this).text());
     });
-
-    // task 8
     
     $('body').on('click', '.submit', function() {
         $('.error').css("color", "red");
     });
-
     $('.submit').click(validateForm);
-
     function validateForm() {
         let validationArray = [];
         let i = 0;
@@ -148,7 +128,6 @@ $(document).ready(function() {
             alert('Success!')
         };
     }
-
     function validateElements(value, elName, elClass) {
         if (value.length === 0) {
             $(elClass).after('<br><span class="error">' + elName + ' is required</span>');
@@ -158,34 +137,32 @@ $(document).ready(function() {
         return true;
     }
 
-    // task 9
-
     $('.circle').css({
         'background-color': 'white',
         'position': 'relative',
+        'align-items': 'center',
         'top': '0.3vh',
         'left': '0.3vh',
         'height': '20px',
         'width': '20px',
-        'border-radius': '20px',
+        'border-radius': '20px'
     });
-
     $('.switch').css({
         'background-color': 'lightgrey',
         'height': '25px',
         'width': '60px',
         'border-radius': '20px',
+        'transition': '0.5s linear'
     });
-
     let isOn = false;
     $('.switch').click(function() {
         isOn = !isOn;
         if (isOn) {
             $('.circle').animate({left: '4.4vh'});
-            $('.switch').css("background-color", "lightblue");
+            $('.switch').css('background-color', '#b3e5fc');
         } else {
             $('.circle').animate({left: '0.3vh'});
-            $('.switch').css("background-color", "lightgrey");
+            $('.switch').css('background-color', 'lightgrey');
         }
     });
 });
